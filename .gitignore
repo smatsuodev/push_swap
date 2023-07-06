@@ -1,0 +1,10 @@
+*.o
+*.a
+.DS_Store
+push_swap
+push_swap_tester
+*.dSYM
+.cache
+compile_commands.json
+checker_Mac
+checker
