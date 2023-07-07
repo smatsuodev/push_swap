@@ -6,7 +6,7 @@
 /*   By: smatsuo <smatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 13:03:14 by smatsuo           #+#    #+#             */
-/*   Updated: 2023/07/06 12:04:32 by smatsuo          ###   ########.fr       */
+/*   Updated: 2023/07/08 00:11:24 by smatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ t_stack	*new_stack_from(char **str_arr, int arr_len)
 		return (NULL);
 	}
 	set_string_to_stack(stack, arr);
+	compress_buffer_a(stack);
 	return (stack);
 }
 
@@ -72,4 +73,18 @@ void	set_string_to_stack(t_stack *stack, char **str_arr)
 		destory_stack(stack);
 		exit_on_error();
 	}
+}
+
+void	compress_buffer_a(t_stack *stack)
+{
+	int	*compressed_buffer;
+
+	compressed_buffer = compress_array(stack->buffer_a, stack->size);
+	if (compressed_buffer == NULL)
+	{
+		destory_stack(stack);
+		exit_on_error();
+	}
+	free(stack->buffer_a);
+	stack->buffer_a = compressed_buffer;
 }

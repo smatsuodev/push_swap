@@ -7,7 +7,7 @@ EXEC_BIN_NAME	= a.out
 
 MANDATORY_DIR	= .
 CFLAGS   		= -Wall -Wextra -Werror
-CFLAGS_DEBUG	= $(CFLAGS) -g -fsanitize=address,undefined
+DFLAGS			= $(CFLAGS) -g -fsanitize=address,undefined
 INCLUDE_DIR	 	= $(MANDATORY_DIR)/includes $(LIBFT_PATH)
 INCLUDE_OPTION	= $(addprefix -I ,$(INCLUDE_DIR))
 INCLUDE_FILES	= $(addsuffix /*.h,$(INCLUDE_DIR))
@@ -31,14 +31,24 @@ $(NAME): $(SRC_OBJECTS) $(LIBFT_OBJECTS)
 
 bonus: all
 
+ifdef IS_DEBUG
+$(LIBFT_OBJECTS):
+	make -C $(LIBFT_PATH) IS_DEBUG=1
+else
 $(LIBFT_OBJECTS):
 	make -C $(LIBFT_PATH)
+endif
 
 %_bonus.o: %_bonus.c
 	$(CC) $(BONUS_INCLUDE_OPTION) $(CFLAGS) -c $< -o $@
 
+ifdef IS_DEBUG
+%.o: %.c
+	$(CC) $(INCLUDE_OPTION) $(DFLAGS) -c $< -o $@
+else
 %.o: %.c
 	$(CC) $(INCLUDE_OPTION) $(CFLAGS) -c $< -o $@
+endif
 
 clean:
 	$(RM) $(SRC_OBJECTS)
@@ -60,16 +70,15 @@ main: $(SRC_FILES) $(LIBFT_A)
 	$(CC) $(INCLUDE_OPTION) $(CFLAGS) -o $(EXEC_BIN_NAME) $^ $(LIBFT_A)
 	./$(EXEC_BIN_NAME)
 
-debug: $(SRC_FILES) $(LIBFT_A)
-	$(CC) $(INCLUDE_OPTION) $(CFLAGS_DEBUG) -o $(EXEC_BIN_NAME) $^ $(LIBFT_A)
-	./$(EXEC_BIN_NAME)
+debug:
+	make IS_DEBUG=1
 
 bmain: $(BONUS_SRC_FILES) $(LIBFT_A)
 	$(CC) $(BONUS_INCLUDE_OPTION) $(CFLAGS) -o $(EXEC_BIN_NAME) $^
 	./$(EXEC_BIN_NAME)
 
 bdebug: $(BONUS_SRC_FILES) $(LIBFT_A)
-	$(CC) $(BONUS_INCLUDE_OPTION) $(CFLAGS_DEBUG) -o $(EXEC_BIN_NAME) $^
+	$(CC) $(BONUS_INCLUDE_OPTION) $(DFLAGS) -o $(EXEC_BIN_NAME) $^
 	./$(EXEC_BIN_NAME)
 
 norm:

@@ -13,15 +13,27 @@ all: $(NAME)
 
 bonus: all
 
+ifdef IS_DEBUG
+$(NAME): $(LIBARC) $(MSRC)
+	$(CC) -o $(NAME) $(DFLAGS) $(INCLUDES) $(MSRC)
+else
 $(NAME): $(LIBARC) $(MSRC)
 	$(CC) -o $(NAME) $(CFLAGS) $(INCLUDES) $(MSRC)
+endif
 
+ifdef IS_DEBUG
+$(LIBARC):
+	make debug -C $(LIBDIR)/libft
+	make debug -C $(LIBDIR)/ft_printf
+else
 $(LIBARC):
 	make -C $(LIBDIR)/libft
 	make -C $(LIBDIR)/ft_printf
+endif
 
-debug: $(LIBARC) $(MSRC)
-	$(CC) -o $(NAME) $(DFLAGS) $(INCLUDES) $(MSRC)
+debug:
+	make IS_DEBUG=1
+	make clean
 
 norm:
 	norminette -R CheckForbiddenSourceHeader

@@ -6,7 +6,7 @@
 /*   By: smatsuo <smatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 10:53:57 by smatsuo           #+#    #+#             */
-/*   Updated: 2023/07/06 12:04:06 by smatsuo          ###   ########.fr       */
+/*   Updated: 2023/07/08 00:47:23 by smatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ typedef struct s_stack {
 t_stack		*new_empty_stack(int size);
 t_stack		*new_stack_from(char **str_arr, int arr_len);
 void		set_string_to_stack(t_stack *stack, char **str_arr);
+void		compress_buffer_a(t_stack *stack);
 void		destory_stack(t_stack *stack);
 
 // Controls of stack
@@ -92,13 +93,18 @@ void		rra(t_stack *stack);
 void		rrb(t_stack *stack);
 void		rrr(t_stack *stack);
 
-// Push Swap
+// Solvers
 void		solve_in_3(t_stack *stack);
+void		solve_in_4(t_stack *stack);
 
 // String Array
 char		**flatten_str_arr(char **str_arr, int arr_len);
 int			count_strings(char **str_arr, int arr_len);
 void		free_str_arr(char **arr);
+
+// Int Array
+int			*duplicate_int_arr(int *original, int arr_len);
+int			*search_in_int_arr(int *arr, int arr_len, int target);
 
 // Validation
 int			is_valid_nums(char **arr);
@@ -106,5 +112,7 @@ int			is_nums_unique(int *arr, int arr_len);
 
 // Utils
 int			ft_atoi_ex(char *s, int *iserr);
+int			*sort(int *arr, int arr_len);
+int			*compress_array(int *arr, int arr_len);
 
 #endif

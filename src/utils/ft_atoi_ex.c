@@ -6,13 +6,13 @@
 /*   By: smatsuo <smatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 11:48:33 by smatsuo           #+#    #+#             */
-/*   Updated: 2023/07/06 12:03:29 by smatsuo          ###   ########.fr       */
+/*   Updated: 2023/07/07 23:37:51 by smatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	return_on_err(int *iserr)
+static int	return_on_err(int *iserr)
 {
 	*iserr = 1;
 	return (0);
