@@ -6,7 +6,7 @@
 /*   By: smatsuo <smatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 23:38:08 by smatsuo           #+#    #+#             */
-/*   Updated: 2023/07/08 00:05:52 by smatsuo          ###   ########.fr       */
+/*   Updated: 2023/07/13 00:20:41 by smatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,15 @@ int	*compress_array(int *arr, int arr_len)
 	int	*res;
 	int	i;
 
-	sorted_arr = sort(arr, arr_len);
+	if (arr == NULL)
+		return (NULL);
+	sorted_arr = sort_int_arr(arr, arr_len);
 	res = ft_calloc(sizeof(int), arr_len);
 	if (sorted_arr == NULL || res == NULL)
 	{
 		free(sorted_arr);
 		free(res);
+		free(arr);
 		return (NULL);
 	}
 	i = 0;
@@ -34,5 +37,6 @@ int	*compress_array(int *arr, int arr_len)
 		i++;
 	}
 	free(sorted_arr);
+	free(arr);
 	return (res);
 }

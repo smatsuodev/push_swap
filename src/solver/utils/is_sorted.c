@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   is_sorted.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smatsuo <smatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/28 23:47:41 by smatsuo           #+#    #+#             */
-/*   Updated: 2023/07/13 00:01:17 by smatsuo          ###   ########.fr       */
+/*   Created: 2023/07/14 21:19:13 by smatsuo           #+#    #+#             */
+/*   Updated: 2023/07/14 21:34:33 by smatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	exit_on_error(void)
+int	is_sorted(t_node *node, int size)
 {
-	ft_printf("Error\n");
-	exit(1);
-}
+	int	i;
 
-void	destory_stack_then_exit(t_stack	*stack)
-{
-	destory_stack(stack);
-	exit_on_error();
+	i = 0;
+	while (i < size - 1)
+	{
+		if (node->next->value - node->value != 1)
+			return (0);
+		node = node->next;
+		i++;
+	}
+	return (1);
 }

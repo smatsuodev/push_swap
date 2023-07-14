@@ -6,13 +6,13 @@
 /*   By: smatsuo <smatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 23:38:27 by smatsuo           #+#    #+#             */
-/*   Updated: 2023/07/08 00:11:57 by smatsuo          ###   ########.fr       */
+/*   Updated: 2023/07/12 23:47:46 by smatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	*sort(int *arr, int arr_len)
+int	*sort_int_arr(int *arr, int arr_len)
 {
 	int	*res;
 	int	i;

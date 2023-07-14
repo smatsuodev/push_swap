@@ -6,7 +6,7 @@
 /*   By: smatsuo <smatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 10:53:57 by smatsuo           #+#    #+#             */
-/*   Updated: 2023/07/08 00:47:23 by smatsuo          ###   ########.fr       */
+/*   Updated: 2023/07/14 23:35:23 by smatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,6 @@
 # include <unistd.h>
 # include "libft.h"
 # include "ft_printf.h"
-
-// Error handling
-void		exit_on_error(void);
 
 // Opearations
 typedef enum e_op {
@@ -50,14 +47,25 @@ void		print_op(t_op op);
 void		print_ops(t_op_list *list);
 void		destory_op_list(t_op_list *list);
 
+// Node of stack
+typedef struct s_node {
+	int				value;
+	struct s_node	*next;
+	struct s_node	*prev;
+}			t_node;
+
+// Constructor/Destructor of stack
+t_node		*new_node(int value);
+void		destory_node(t_node **node);
+
+// Controls of stack
+void		insert_node(t_node **node, t_node *new_node);
+t_node		*pop_node(t_node **node);
+
 // Stack
 typedef struct s_stack {
-	int			*buffer_a;
-	int			*buffer_b;
-	int			front_a;
-	int			rear_a;
-	int			front_b;
-	int			rear_b;
+	t_node		*top_a;
+	t_node		*top_b;
 	int			size;
 	t_op_list	*op_list;
 }	t_stack;
@@ -66,16 +74,15 @@ typedef struct s_stack {
 t_stack		*new_empty_stack(int size);
 t_stack		*new_stack_from(char **str_arr, int arr_len);
 void		set_string_to_stack(t_stack *stack, char **str_arr);
-void		compress_buffer_a(t_stack *stack);
 void		destory_stack(t_stack *stack);
 
 // Controls of stack
 int			at_a(t_stack *stack, int index);
 int			at_b(t_stack *stack, int index);
-void		push_to_a(t_stack *stack, int value);
-void		push_to_b(t_stack *stack, int value);
-int			pop_from_a(t_stack *stack);
-int			pop_from_b(t_stack *stack);
+void		push_to_a(t_stack *stack, t_node *node);
+void		push_to_b(t_stack *stack, t_node *node);
+t_node		*pop_from_a(t_stack *stack);
+t_node		*pop_from_b(t_stack *stack);
 void		rotate_a(t_stack *stack);
 void		rotate_b(t_stack *stack);
 void		rev_rotate_a(t_stack *stack);
@@ -94,8 +101,14 @@ void		rrb(t_stack *stack);
 void		rrr(t_stack *stack);
 
 // Solvers
-void		solve_in_3(t_stack *stack);
-void		solve_in_4(t_stack *stack);
+void		sort(t_stack *stack);
+void		sort_2(t_stack *stack);
+void		sort_3(t_stack *stack);
+void		sort_4(t_stack *stack);
+void		sort_5(t_stack *stack);
+
+// Utils for solvers
+int			is_sorted(t_node *node, int size);
 
 // String Array
 char		**flatten_str_arr(char **str_arr, int arr_len);
@@ -110,9 +123,15 @@ int			*search_in_int_arr(int *arr, int arr_len, int target);
 int			is_valid_nums(char **arr);
 int			is_nums_unique(int *arr, int arr_len);
 
+// Error handling
+void		exit_on_error(void);
+void		destory_stack_then_exit(t_stack	*stack);
+
 // Utils
 int			ft_atoi_ex(char *s, int *iserr);
-int			*sort(int *arr, int arr_len);
+int			*ft_atoi_arr(char **str_arr, int *iserr);
+int			*sort_int_arr(int *arr, int arr_len);
 int			*compress_array(int *arr, int arr_len);
+int			get_index_of_min_value_on_list(t_node *node, int size);
 
 #endif

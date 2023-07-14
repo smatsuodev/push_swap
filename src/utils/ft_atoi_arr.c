@@ -1,25 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   ft_atoi_arr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smatsuo <smatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/28 23:47:41 by smatsuo           #+#    #+#             */
-/*   Updated: 2023/07/13 00:01:17 by smatsuo          ###   ########.fr       */
+/*   Created: 2023/07/12 23:57:36 by smatsuo           #+#    #+#             */
+/*   Updated: 2023/07/13 00:23:09 by smatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	exit_on_error(void)
+int	*ft_atoi_arr(char **str_arr, int *iserr)
 {
-	ft_printf("Error\n");
-	exit(1);
-}
+	int	arr_len;
+	int	*res;
+	int	i;
 
-void	destory_stack_then_exit(t_stack	*stack)
-{
-	destory_stack(stack);
-	exit_on_error();
+	arr_len = 0;
+	while (str_arr[arr_len] != NULL)
+		arr_len++;
+	res = ft_calloc(sizeof(int), arr_len);
+	i = 0;
+	if (res == NULL)
+		return (NULL);
+	while (i < arr_len)
+	{
+		res[i] = ft_atoi_ex(str_arr[i], iserr);
+		i++;
+	}
+	return (res);
 }

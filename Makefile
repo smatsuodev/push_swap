@@ -31,7 +31,7 @@ $(LIBARC):
 	make -C $(LIBDIR)/ft_printf
 endif
 
-debug:
+debug: fclean
 	make IS_DEBUG=1
 	make clean
 

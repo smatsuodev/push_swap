@@ -1,47 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   solve_in_4.c                                       :+:      :+:    :+:   */
+/*   insert.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smatsuo <smatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/06 13:49:57 by smatsuo           #+#    #+#             */
-/*   Updated: 2023/07/08 01:54:55 by smatsuo          ###   ########.fr       */
+/*   Created: 2023/07/08 02:56:53 by smatsuo           #+#    #+#             */
+/*   Updated: 2023/07/14 21:00:56 by smatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	solve_in_4(t_stack *stack)
+void	insert_node(t_node **node, t_node *new_node)
 {
-	if (at_a(stack, 0))
+	if (*node == NULL)
 	{
-		pb(stack);
-		solve_in_3(stack);
-		pa(stack);
+		*node = new_node;
+		new_node->next = new_node;
+		new_node->prev = new_node;
+	}
+	else if (new_node != NULL)
+	{
+		new_node->next = *node;
+		new_node->prev = (*node)->prev;
+		(*node)->prev->next = new_node;
+		(*node)->prev = new_node;
 	}
 }
-
-// 0 1 3 2
-// 0 2 1 3
-// 0 2 3 1
-// 0 3 1 2
-// 0 3 2 1
-// 1 0 2 3
-// 1 0 3 2
-// 1 2 0 3
-// 1 2 3 0
-// 1 3 0 2
-// 1 3 2 0
-// 2 0 1 3
-// 2 0 3 1
-// 2 1 0 3
-// 2 1 3 0
-// 2 3 0 1
-// 2 3 1 0
-// 3 0 1 2
-// 3 0 2 1
-// 3 1 0 2
-// 3 1 2 0
-// 3 2 0 1
-// 3 2 1 0

@@ -1,25 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   sort_2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smatsuo <smatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/28 23:47:41 by smatsuo           #+#    #+#             */
-/*   Updated: 2023/07/13 00:01:17 by smatsuo          ###   ########.fr       */
+/*   Created: 2023/07/14 20:40:38 by smatsuo           #+#    #+#             */
+/*   Updated: 2023/07/14 20:41:49 by smatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	exit_on_error(void)
+void	sort_2(t_stack *stack)
 {
-	ft_printf("Error\n");
-	exit(1);
-}
-
-void	destory_stack_then_exit(t_stack	*stack)
-{
-	destory_stack(stack);
-	exit_on_error();
+	if (at_a(stack, 0) > at_a(stack, 1))
+		sa(stack);
 }

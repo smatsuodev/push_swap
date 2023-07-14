@@ -6,7 +6,7 @@
 /*   By: smatsuo <smatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 00:06:14 by smatsuo           #+#    #+#             */
-/*   Updated: 2023/06/29 00:07:30 by smatsuo          ###   ########.fr       */
+/*   Updated: 2023/07/08 11:00:43 by smatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	pa(t_stack *stack)
 {
-	int	tmp;
+	t_node	*tmp;
 
 	tmp = pop_from_b(stack);
 	push_to_a(stack, tmp);
@@ -23,7 +23,7 @@ void	pa(t_stack *stack)
 
 void	pb(t_stack *stack)
 {
-	int	tmp;
+	t_node	*tmp;
 
 	tmp = pop_from_a(stack);
 	push_to_b(stack, tmp);

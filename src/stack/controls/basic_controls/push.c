@@ -6,20 +6,20 @@
 /*   By: smatsuo <smatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 01:49:27 by smatsuo           #+#    #+#             */
-/*   Updated: 2023/06/29 00:12:44 by smatsuo          ###   ########.fr       */
+/*   Updated: 2023/07/08 10:58:25 by smatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	push_to_a(t_stack *stack, int value)
+void	push_to_a(t_stack *stack, t_node *node)
 {
-	stack->buffer_a[stack->front_a] = value;
-	stack->front_a = (stack->front_a + 1) % stack->size;
+	insert_node(&stack->top_a, node);
+	stack->top_a = node;
 }
 
-void	push_to_b(t_stack *stack, int value)
+void	push_to_b(t_stack *stack, t_node *node)
 {
-	stack->buffer_b[stack->front_b] = value;
-	stack->front_b = (stack->front_b + 1) % stack->size;
+	insert_node(&stack->top_b, node);
+	stack->top_b = node;
 }

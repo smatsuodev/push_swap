@@ -6,7 +6,7 @@
 /*   By: smatsuo <smatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 02:24:01 by smatsuo           #+#    #+#             */
-/*   Updated: 2023/07/05 02:28:11 by smatsuo          ###   ########.fr       */
+/*   Updated: 2023/07/13 00:05:00 by smatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,20 +34,20 @@ int	is_valid_nums(char **arr)
 
 int	is_nums_unique(int *arr, int arr_len)
 {
-	int	i;
-	int	j;
+	int	former_i;
+	int	letter_i;
 
-	i = 0;
-	while (i < arr_len)
+	former_i = 0;
+	while (former_i < arr_len)
 	{
-		j = 0;
-		while (j < i)
+		letter_i = former_i + 1;
+		while (letter_i < arr_len)
 		{
-			if (arr[i] == arr[j])
+			if (arr[former_i] == arr[letter_i])
 				return (0);
-			j++;
+			letter_i++;
 		}
-		i++;
+		former_i++;
 	}
 	return (1);
 }
