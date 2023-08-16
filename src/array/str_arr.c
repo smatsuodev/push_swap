@@ -6,7 +6,7 @@
 /*   By: smatsuo <smatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 01:23:48 by smatsuo           #+#    #+#             */
-/*   Updated: 2023/07/05 02:24:13 by smatsuo          ###   ########.fr       */
+/*   Updated: 2023/07/15 12:27:14 by smatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,22 @@
 static char	**flatten_str_arr_helper(char **dst, char *src)
 {
 	char	**splitted_str;
+	int		arr_len;
 	char	**tmp;
 
 	splitted_str = ft_split(src, ' ');
 	if (splitted_str == NULL)
 		return (NULL);
+	arr_len = 0;
 	tmp = splitted_str;
 	while (*tmp != NULL)
+	{
+		arr_len++;
 		*dst++ = *tmp++;
+	}
 	free(splitted_str);
+	if (arr_len == 0)
+		return (NULL);
 	return (dst);
 }
 
@@ -86,6 +93,8 @@ void	free_str_arr(char **arr)
 {
 	char	**tmp;
 
+	if (arr == NULL)
+		return ;
 	tmp = arr;
 	while (*tmp != NULL)
 		free(*tmp++);

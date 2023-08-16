@@ -6,7 +6,7 @@
 /*   By: smatsuo <smatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 12:51:11 by smatsuo           #+#    #+#             */
-/*   Updated: 2023/07/05 02:21:02 by smatsuo          ###   ########.fr       */
+/*   Updated: 2023/08/17 00:06:51 by smatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	print_op(t_op op)
 	if (op == SA)
 		ft_printf("sa\n");
 	if (op == SB)
-		ft_printf("sa\n");
+		ft_printf("sb\n");
 	if (op == SS)
 		ft_printf("ss\n");
 	if (op == PA)
@@ -62,13 +62,14 @@ void	print_op(t_op op)
 		ft_printf("rrr\n");
 }
 
-void	print_ops(t_op_list *list)
+void	print_ops(t_op_list **list)
 {
 	t_op_list	*cur_node;
 
 	if (list == NULL)
 		return ;
-	cur_node = list;
+	optimize_ops(list);
+	cur_node = *list;
 	while (cur_node != NULL)
 	{
 		print_op(cur_node->op);
@@ -76,7 +77,7 @@ void	print_ops(t_op_list *list)
 	}
 }
 
-void	destory_op_list(t_op_list *list)
+void	destroy_op_list(t_op_list *list)
 {
 	t_op_list	*cur_node;
 	t_op_list	*tmp;

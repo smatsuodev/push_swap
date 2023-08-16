@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   destructor.c                                       :+:      :+:    :+:   */
+/*   repeat.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smatsuo <smatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/28 01:46:27 by smatsuo           #+#    #+#             */
-/*   Updated: 2023/08/16 23:42:07 by smatsuo          ###   ########.fr       */
+/*   Created: 2023/08/17 03:32:33 by smatsuo           #+#    #+#             */
+/*   Updated: 2023/08/17 04:00:26 by smatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	destroy_stack(t_stack *stack)
+void	repeat(void (*op)(t_stack *), t_stack *stack, int times)
 {
-	destroy_node(&stack->top_a);
-	destroy_node(&stack->top_b);
-	free(stack);
+	int	i;
+
+	i = 0;
+	while (i++ < times)
+		op(stack);
 }

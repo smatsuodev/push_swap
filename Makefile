@@ -1,39 +1,47 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: smatsuo <smatsuo@student.42tokyo.jp>       +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/08/13 17:45:39 by smatsuo           #+#    #+#              #
+#    Updated: 2023/08/17 01:09:12 by smatsuo          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME		= push_swap
-CFLAGS 		= -Wall -Wextra -Werror $(LFLAGS)
-DFLAGS 		= $(CFLAGS) -g -fsanitize=address,undefined
+CFLAGS 		= -Wall -Wextra -Werror
+DFLAGS 		= -g -fsanitize=address,undefined
 LFLAGS		= -L$(LIBDIR)/libft -lft -L$(LIBDIR)/ft_printf -lftprintf
 SRCDIR		= ./src
-MSRC		:= $(shell find $(SRCDIR) -type f -name '*.c')
+MSRCS		:= $(shell find $(SRCDIR) -type f -name '*.c')
+MOBJS		:= $(MSRCS:.c=.o)
 LIBDIR		= ./libs
 LIBARC		= $(LIBDIR)/libft/libft.a $(LIBDIR)/ft_printf/libftprintf.a
 INCLUDEDIR	= ./includes $(LIBDIR)/ft_printf/includes $(LIBDIR)/libft
 INCLUDES	= $(addprefix -I ,$(INCLUDEDIR))
 
+ifeq ($(IS_DEBUG), 1)
+	CFLAGS += $(DFLAGS)
+endif
+
 all: $(NAME)
 
 bonus: all
 
-ifdef IS_DEBUG
-$(NAME): $(LIBARC) $(MSRC)
-	$(CC) -o $(NAME) $(DFLAGS) $(INCLUDES) $(MSRC)
-else
-$(NAME): $(LIBARC) $(MSRC)
-	$(CC) -o $(NAME) $(CFLAGS) $(INCLUDES) $(MSRC)
-endif
+$(NAME): $(MOBJS) $(LIBARC)
+	$(CC) -o $(NAME) $(CFLAGS) $(LFLAGS) $(INCLUDES) $(MOBJS)
 
-ifdef IS_DEBUG
-$(LIBARC):
-	make debug -C $(LIBDIR)/libft
-	make debug -C $(LIBDIR)/ft_printf
-else
-$(LIBARC):
-	make -C $(LIBDIR)/libft
-	make -C $(LIBDIR)/ft_printf
-endif
+.c.o: ./includes/push_swap.h
+	$(CC) -c -o $@ $(CFLAGS) $(INCLUDES) $<
 
-debug: fclean
+$(LIBARC):
+	make -C $(LIBDIR)/libft bonus
+	make -C $(LIBDIR)/ft_printf bonus
+
+debug:
 	make IS_DEBUG=1
-	make clean
 
 norm:
 	norminette -R CheckForbiddenSourceHeader
@@ -46,7 +54,7 @@ setup:
 re: fclean all
 
 clean:
-	rm -f *.o *.a
+	rm -f $(MOBJS)
 	make -C $(LIBDIR)/libft clean
 	make -C $(LIBDIR)/ft_printf clean
 

@@ -6,7 +6,7 @@
 /*   By: smatsuo <smatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 00:12:11 by smatsuo           #+#    #+#             */
-/*   Updated: 2023/07/08 10:22:47 by smatsuo          ###   ########.fr       */
+/*   Updated: 2023/07/21 11:01:30 by smatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,20 @@
 
 t_node	*pop_from_a(t_stack *stack)
 {
-	return (pop_node(&stack->top_a));
+	t_node	*res;
+
+	res = pop_node(&stack->top_a);
+	if (res != NULL)
+		stack->size_a--;
+	return (res);
 }
 
 t_node	*pop_from_b(t_stack *stack)
 {
-	return (pop_node(&stack->top_b));
+	t_node	*res;
+
+	res = pop_node(&stack->top_b);
+	if (res != NULL)
+		stack->size_b--;
+	return (res);
 }

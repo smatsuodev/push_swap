@@ -6,7 +6,7 @@
 /*   By: smatsuo <smatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:45:26 by smatsuo           #+#    #+#             */
-/*   Updated: 2023/07/14 21:59:19 by smatsuo          ###   ########.fr       */
+/*   Updated: 2023/08/17 04:34:50 by smatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(int argc, char **argv)
 	if (stack == NULL)
 		exit_on_error();
 	sort(stack);
-	print_ops(stack->op_list);
-	destory_stack(stack);
+	print_ops(&stack->op_list);
+	destroy_stack(stack);
 	return (0);
 }

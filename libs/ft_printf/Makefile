@@ -31,7 +31,7 @@ $(NAME): $(SRC_OBJECTS) $(LIBFT_OBJECTS)
 
 bonus: all
 
-ifdef IS_DEBUG
+ifeq ($(IS_DEBUG), 1)
 $(LIBFT_OBJECTS):
 	make -C $(LIBFT_PATH) IS_DEBUG=1
 else
@@ -42,7 +42,7 @@ endif
 %_bonus.o: %_bonus.c
 	$(CC) $(BONUS_INCLUDE_OPTION) $(CFLAGS) -c $< -o $@
 
-ifdef IS_DEBUG
+ifeq ($(IS_DEBUG), 1)
 %.o: %.c
 	$(CC) $(INCLUDE_OPTION) $(DFLAGS) -c $< -o $@
 else

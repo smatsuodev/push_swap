@@ -6,7 +6,7 @@
 /*   By: smatsuo <smatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 00:06:14 by smatsuo           #+#    #+#             */
-/*   Updated: 2023/07/08 11:00:43 by smatsuo          ###   ########.fr       */
+/*   Updated: 2023/08/17 03:34:45 by smatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,10 @@ void	pb(t_stack *stack)
 	tmp = pop_from_a(stack);
 	push_to_b(stack, tmp);
 	record_op_to_stack(stack, PB);
+}
+
+void	para(t_stack *stack)
+{
+	pa(stack);
+	ra(stack);
 }

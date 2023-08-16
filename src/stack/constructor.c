@@ -6,7 +6,7 @@
 /*   By: smatsuo <smatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 13:03:14 by smatsuo           #+#    #+#             */
-/*   Updated: 2023/07/13 00:25:06 by smatsuo          ###   ########.fr       */
+/*   Updated: 2023/08/16 23:47:45 by smatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_stack	*new_stack_from(char **str_arr, int arr_len)
 	int		stack_size;
 
 	arr = flatten_str_arr(str_arr, arr_len);
-	if (!is_valid_nums(arr))
+	if (arr == NULL || !is_valid_nums(arr))
 	{
 		free_str_arr(arr);
 		return (NULL);
@@ -43,6 +43,7 @@ t_stack	*new_stack_from(char **str_arr, int arr_len)
 		return (NULL);
 	}
 	set_string_to_stack(stack, arr);
+	stack->size_a = stack->size;
 	return (stack);
 }
 
@@ -59,7 +60,7 @@ void	set_string_to_stack(t_stack *stack, char **str_arr)
 	if (int_arr == NULL || iserr || !is_nums_unique(int_arr, stack->size))
 	{
 		free(int_arr);
-		destory_stack_then_exit(stack);
+		destroy_stack_then_exit(stack);
 	}
 	i = stack->size - 1;
 	while (i >= 0)
@@ -68,7 +69,7 @@ void	set_string_to_stack(t_stack *stack, char **str_arr)
 		if (node == NULL)
 		{
 			free(int_arr);
-			destory_stack_then_exit(stack);
+			destroy_stack_then_exit(stack);
 		}
 		push_to_a(stack, node);
 	}

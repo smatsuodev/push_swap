@@ -6,7 +6,7 @@
 /*   By: smatsuo <smatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 21:19:13 by smatsuo           #+#    #+#             */
-/*   Updated: 2023/07/14 21:34:33 by smatsuo          ###   ########.fr       */
+/*   Updated: 2023/08/16 22:55:39 by smatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	is_sorted(t_node *node, int size)
 	i = 0;
 	while (i < size - 1)
 	{
-		if (node->next->value - node->value != 1)
+		if (node->next->value < node->value)
 			return (0);
 		node = node->next;
 		i++;
