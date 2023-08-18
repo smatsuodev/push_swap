@@ -6,7 +6,7 @@
 /*   By: smatsuo <smatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 10:53:57 by smatsuo           #+#    #+#             */
-/*   Updated: 2023/08/17 04:44:13 by smatsuo          ###   ########.fr       */
+/*   Updated: 2023/08/18 22:57:03 by smatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@
 # ifndef MAX_GROUP_SIZE
 #  define MAX_GROUP_SIZE 10
 # endif
+
+// Num of elements that can be sorted in optimized way
+# define OPT_SORT_SIZE 4
 
 // Opearations
 typedef enum e_op {
@@ -68,6 +71,8 @@ void		destroy_node(t_node **node);
 // Controls of stack
 void		insert_node(t_node **node, t_node *new_node);
 t_node		*pop_node(t_node **node);
+int			has_upper_than_median(t_node *node, int median);
+int			has_lower_than_median(t_node *node, int median);
 
 // Stack
 typedef struct s_stack {
@@ -123,7 +128,6 @@ void		sort_4_in_a(t_stack *stack);
 void		sort_4_in_b(t_stack *stack);
 void		sort_5_in_a(t_stack *stack);
 void		sort_5_in_b(t_stack *stack);
-void		sort_6(t_stack *stack);
 void		quick_sort(t_stack *stack);
 void		pickup_from_a(t_stack *stack, int group_id);
 void		pickup_from_b(t_stack *stack, int group_id);

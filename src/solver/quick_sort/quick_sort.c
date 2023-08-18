@@ -6,7 +6,7 @@
 /*   By: smatsuo <smatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 11:09:44 by smatsuo           #+#    #+#             */
-/*   Updated: 2023/08/17 04:57:54 by smatsuo          ###   ########.fr       */
+/*   Updated: 2023/08/18 23:42:17 by smatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	pickup_from_a(t_stack *stack, int group_id)
 	if (median == -1)
 		destroy_stack_then_exit(stack);
 	i = 0;
-	while (i++ < size)
+	while (i++ < size && has_lower_than_median(stack->top_a, median))
 	{
 		if (at_a(stack, 0) <= median)
 		{
@@ -42,7 +42,8 @@ void	pickup_from_b(t_stack *stack, int group_id)
 	median = get_median_in_list(stack->top_b, stack->size_b);
 	if (median == -1)
 		destroy_stack_then_exit(stack);
-	while (stack->size_b > 0 && stack->top_b->group_id != group_id)
+	while (stack->size_b > 0 && stack->top_b->group_id != group_id
+		&& has_upper_than_median(stack->top_b, median))
 	{
 		stack->top_b->group_id = group_id;
 		if (at_b(stack, 0) == stack->next_min_value)
@@ -62,6 +63,8 @@ void	sort_short_stack(t_stack *stack)
 {
 	if (stack->size_b > 5)
 		return ;
+	if (stack->size_b == 1)
+		para(stack);
 	if (stack->size_b == 2)
 		sort_2_in_b(stack);
 	else if (stack->size_b == 3)
@@ -72,47 +75,39 @@ void	sort_short_stack(t_stack *stack)
 		sort_5_in_b(stack);
 }
 
+static void	quick_sort_helper(t_stack *stack)
+{
+	int	group_id_tmp;
+
+	if (stack->size_b == 0)
+	{
+		group_id_tmp = stack->top_a->group_id;
+		while (stack->top_a->group_id == group_id_tmp)
+		{
+			if (at_a(stack, 0) == stack->next_min_value)
+			{
+				ra(stack);
+				stack->next_min_value++;
+			}
+			else
+				pb(stack);
+		}
+	}
+}
+
 void	quick_sort(t_stack *stack)
 {
 	int	cur_group_id;
-	int	group_id_tmp;
 
 	cur_group_id = 1;
 	while (!(stack->size_a == stack->size
 			&& is_sorted(stack->top_a, stack->size_a)))
 	{
-//		print_stack(stack);
 		if (cur_group_id == 1)
-		{
 			pickup_from_a(stack, cur_group_id++);
-//			ft_printf("pickup_from_a\n");
-//			print_stack(stack);
-		}
-		if (stack->size_b == 0)
-		{
-			group_id_tmp = stack->top_a->group_id;
-			while (stack->top_a->group_id == group_id_tmp)
-			{
-				if (at_a(stack, 0) == stack->next_min_value)
-				{
-					ra(stack);
-					stack->next_min_value++;
-				}
-				else
-					pb(stack);
-			}
-//			ft_printf("pb\n");
-//			print_stack(stack);
-		}
-//		ft_printf("end pb\n");
+		quick_sort_helper(stack);
 		while (stack->size_b >= MAX_GROUP_SIZE * 2)
-		{
 			pickup_from_b(stack, cur_group_id++);
-//			ft_printf("pickup_from_b\n");
-//			print_stack(stack);
-		}
-//		ft_printf("end pickup_from_b\n");
 		insertion_sort_in_b(stack);
 	}
-//	print_stack(stack);
 }

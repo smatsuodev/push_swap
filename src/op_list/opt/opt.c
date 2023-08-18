@@ -6,7 +6,7 @@
 /*   By: smatsuo <smatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 17:58:36 by smatsuo           #+#    #+#             */
-/*   Updated: 2023/08/17 00:09:44 by smatsuo          ###   ########.fr       */
+/*   Updated: 2023/08/18 21:28:20 by smatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,12 @@ void	remove_front(t_op_list **list)
 	*list = tmp;
 }
 
+void	replace_ops(t_op_list **cur, t_op new_op)
+{
+	remove_front(cur);
+	(*cur)->op = new_op;
+}
+
 void	optimize_ops(t_op_list **list)
 {
 	t_op_list	**cur;
@@ -40,19 +46,15 @@ void	optimize_ops(t_op_list **list)
 	while (*cur != NULL)
 	{
 		if (is_op_pair(*cur, SA, SB))
-		{
-			remove_front(cur);
-			(*cur)->op = SS;
-		}
+			replace_ops(cur, SS);
 		if (is_op_pair(*cur, RA, RB))
-		{
-			remove_front(cur);
-			(*cur)->op = RR;
-		}
+			replace_ops(cur, RR);
 		if (is_op_pair(*cur, RRA, RRB))
+			replace_ops(cur, RRR);
+		if (is_op_pair(*cur, RB, RRB) || is_op_pair(*cur, RA, RRA))
 		{
 			remove_front(cur);
-			(*cur)->op = RRR;
+			remove_front(cur);
 		}
 		cur = &((*cur)->next);
 	}
