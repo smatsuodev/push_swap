@@ -6,7 +6,7 @@
 /*   By: smatsuo <smatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 10:53:57 by smatsuo           #+#    #+#             */
-/*   Updated: 2023/08/18 22:57:03 by smatsuo          ###   ########.fr       */
+/*   Updated: 2023/08/19 16:13:13 by smatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <unistd.h>
 # include "libft.h"
 # include "ft_printf.h"
+# include "get_next_line_bonus.h"
 
 // Max num of elements for each group divided in quick_sort
 # ifndef MAX_GROUP_SIZE
@@ -28,6 +29,7 @@
 
 // Opearations
 typedef enum e_op {
+	UNKNOWN,
 	SA,
 	SB,
 	SS,
@@ -163,5 +165,10 @@ int			get_index_of_min_value_in_list(t_node *node, int size);
 int			get_min_value_in_list(t_node *node, int size);
 int			get_max_value_in_list(t_node *node, int size);
 double		get_median_in_list(t_node *node, int size);
+
+// Bonus: checker
+void		run_ops(t_stack *stack, t_op_list *op_list);
+void		run_op(t_stack *stack, t_op op);
+t_op		str_to_op(char *str);
 
 #endif

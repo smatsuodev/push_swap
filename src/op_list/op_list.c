@@ -6,7 +6,7 @@
 /*   By: smatsuo <smatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 12:51:11 by smatsuo           #+#    #+#             */
-/*   Updated: 2023/08/17 00:06:51 by smatsuo          ###   ########.fr       */
+/*   Updated: 2023/08/19 16:06:48 by smatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ t_op_list	*append_op(t_op_list *list, t_op op)
 {
 	t_op_list	*new_node;
 
+	if (list == NULL)
+		return (NULL);
 	new_node = new_op_list(op);
 	if (new_node == NULL)
 		return (NULL);

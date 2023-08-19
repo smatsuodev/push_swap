@@ -8,4 +8,5 @@ push_swap_tester
 compile_commands.json
 checker_Mac
 checker
+!src/checker
 pain*
