@@ -6,7 +6,7 @@
 /*   By: smatsuo <smatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 13:03:14 by smatsuo           #+#    #+#             */
-/*   Updated: 2023/08/19 14:45:34 by smatsuo          ###   ########.fr       */
+/*   Updated: 2023/08/20 00:11:21 by smatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ t_stack	*new_empty_stack(int size)
 	t_stack	*stack;
 
 	stack = ft_calloc(1, sizeof(t_stack));
+	if (stack == NULL)
+		return (NULL);
 	stack->size = size;
 	return (stack);
 }

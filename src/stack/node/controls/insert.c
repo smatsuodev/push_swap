@@ -6,7 +6,7 @@
 /*   By: smatsuo <smatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 02:56:53 by smatsuo           #+#    #+#             */
-/*   Updated: 2023/08/19 14:35:15 by smatsuo          ###   ########.fr       */
+/*   Updated: 2023/08/20 00:26:10 by smatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	insert_node(t_node **node, t_node *new_node)
 {
+	if (new_node == NULL)
+		return ;
 	if (*node == NULL)
 	{
 		*node = new_node;
