@@ -6,7 +6,7 @@
 /*   By: smatsuo <smatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 02:24:01 by smatsuo           #+#    #+#             */
-/*   Updated: 2023/07/13 00:05:00 by smatsuo          ###   ########.fr       */
+/*   Updated: 2023/08/20 12:58:50 by smatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,12 @@ int	is_valid_nums(char **arr)
 	while (*arr != NULL)
 	{
 		cur_str = *arr;
-		if (*cur_str == '-')
+		if (*cur_str == '+')
 			cur_str++;
+		else if (*cur_str == '-')
+			cur_str++;
+		if (!ft_isdigit(*cur_str))
+			return (0);
 		while (*cur_str != '\0')
 		{
 			if (!ft_isdigit(*cur_str))
