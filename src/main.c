@@ -6,7 +6,7 @@
 /*   By: smatsuo <smatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:45:26 by smatsuo           #+#    #+#             */
-/*   Updated: 2023/08/19 14:40:32 by smatsuo          ###   ########.fr       */
+/*   Updated: 2023/08/23 13:04:01 by smatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	main(int argc, char **argv)
 {
 	t_stack	*stack;
 
+	if (argc <= 1)
+		return (0);
 	stack = new_stack_from(argv + 1, argc - 1);
 	if (stack == NULL)
 		exit_on_error();
